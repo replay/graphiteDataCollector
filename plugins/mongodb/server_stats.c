@@ -106,6 +106,7 @@ void bson_path_remove_one(bson_path_t **bp)
         bp = (bson_path_t**) &(*bp)->next;
     } // go to the end of the linked list
     free(*bp);
+    *bp = BP_UNSET_T;
     if (prev != BP_UNSET_T_DP) {
         (*prev)->next = BP_UNSET_S;
     }
