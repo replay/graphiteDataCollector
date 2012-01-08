@@ -1,10 +1,6 @@
 #include "mongo.h"
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <unistd.h>
-
-static const char *db = "poppen";
+#include <netdb.h>
+#include <arpa/inet.h>
 
 typedef struct{
     const char *key;
@@ -25,13 +21,46 @@ void bson_path_print(bson_path_t*);
 int bson_path_add_one(bson_path_t**, const char*);
 void bson_path_remove_one(bson_path_t**);
 
-int main() {
+int main(int argc, char *argv[]) {
 
     mongo conn[1];
     bson out;
     bson_path_t *bp = BP_UNSET_T;
+    char *servername;
+    char **addr_list;
+    char *db;
+    struct hostent *mongo_srv;
+    long int port;
+    int opt;
+    struct in_addr addr;
 
-    if ( mongo_connect( conn , "192.168.1.230", 27017 ) ) {
+    if (argc != 7) {
+        printf("usage: %s -s <mongo server> -p <mongo port> -d <database>\n", argv[0]);
+        return 1;
+    }
+    while ((opt = getopt(argc, argv, "s:p:d:")) != -1) {
+        switch (opt) {
+            case 's':
+                servername = optarg;
+                break;
+            case 'p':
+                port = atoi(optarg);
+                break;
+            case 'd':
+                db = optarg;
+                break;
+            default:
+                printf("default\n");
+        }
+    }
+
+    mongo_srv = gethostbyname(servername);
+    if (mongo_srv != NULL) {
+        memcpy(&addr,mongo_srv->h_addr,mongo_srv->h_length);
+        servername = inet_ntoa(addr);
+    }
+
+    if ( mongo_connect( conn , servername, port ) ) {
         printf( "failed to connect\n" );
         exit( 1 );
     }
