@@ -1,0 +1,3 @@
+This plugin requires the C mongo driver, you can get it from here: https://github.com/mongodb/mongo-c-driver
+
+Its tested with the version 879b67c40a of the mongo C driver 
