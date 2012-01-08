@@ -1,0 +1,7 @@
+This is a bunch of scripts which is ment to collect data about the running system and send it to graphite's carbon server. It's plugin based and very easy to extend. All plugins have to be executable and simple execute data in the form:
+
+<metric> <number>
+
+Graphite can be downloaded here:
+
+http://graphite.wikidot.com/
