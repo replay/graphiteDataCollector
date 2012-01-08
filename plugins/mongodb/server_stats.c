@@ -28,7 +28,6 @@ void bson_path_remove_one(bson_path_t**);
 int main() {
 
     mongo conn[1];
-    bson b;
     bson out;
     bson_path_t *bp = BP_UNSET_T;
 
@@ -37,9 +36,6 @@ int main() {
         exit( 1 );
     }
 
-    bson_init (&b);
-    bson_append_string(&b, "db", "stats");
-    bson_finish(&b);
     mongo_simple_str_command(conn, db, "serverStatus", "", &out);
     bson_print_graphite(out.data, 0, bp);
 
