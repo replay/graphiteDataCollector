@@ -1,3 +1,7 @@
-This plugin requires the C mongo driver, you can get it from here: https://github.com/mongodb/mongo-c-driver
+This plugin requires the C mongo driver, you can get it from here: 
+https://github.com/mongodb/mongo-c-driver
 
 Its tested with the version 879b67c40a of the mongo C driver 
+
+To build on linux you need to tell gcc to define MONGO_HAVE_UNISTD, by adding 
+-DMONGO_HAVE_UNISTD to the gcc command.
