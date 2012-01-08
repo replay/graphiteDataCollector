@@ -9,14 +9,14 @@ then
 fi
 
 echo "preparing directory ${INSTALL_PATH}"
-mkdir ${INSTALL_PATH}
+mkdir ${INSTALL_PATH} || exit 1
 
-cp ./carbon_server.conf ${INSTALL_PATH}
-cp ./generic_carbon_client.pl ${INSTALL_PATH}
+cp ./carbon_server.conf ${INSTALL_PATH} || exit 1
+cp ./generic_carbon_client.pl ${INSTALL_PATH} || exit 1
 
-mkdir -p ${INSTALL_PATH}/plugins/execution_states
+mkdir -p ${INSTALL_PATH}/plugins/execution_states || exit 1
 
-chmod 777 ${INSTALL_PATH}/plugins/execution_states
+chmod 777 ${INSTALL_PATH}/plugins/execution_states || exit 1
 
 echo "done!"
 
