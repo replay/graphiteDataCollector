@@ -5,6 +5,13 @@ in the form:
 
 <metric> <number>
 
+To install a plugin, simply copy its executable script or binary to 
+${INSTALL_PATH}/plugins. The first part name of its filename defines in which 
+interval it should be executed. For example a file with the name 5_memory.sh
+will be executed every 5 minutes. To change its calling interval, simply rename
+it. Remember that in Graphite's storage schema you need to match the interval
+in which the data is collected. Every plugin can have its own interval.
+
 Graphite can be downloaded here:
 
 http://graphite.wikidot.com/
